@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Service contracts -->
+    <preference for="MageOS\MetaRobotsTag\Api\AttributesProviderInterface" type="MageOS\MetaRobotsTag\Model\AttributesProvider"/>
+    <preference for="MageOS\MetaRobotsTag\Api\SetMetaRobotsInterface" type="MageOS\MetaRobotsTag\Model\SetMetaRobots"/>
+</config>

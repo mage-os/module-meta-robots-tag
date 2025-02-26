@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="cms_page_render">
+        <observer name="set_robots" instance="MageOS\MetaRobotsTag\Observer\SetMetaRobotsPage" />
+    </event>
+    <event name="layout_generate_blocks_after">
+        <observer name="set_robots" instance="MageOS\MetaRobotsTag\Observer\SetMetaRobotsCatalog" />
+    </event>
+</config>

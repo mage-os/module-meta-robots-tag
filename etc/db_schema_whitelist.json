@@ -1,0 +1,9 @@
+{
+    "cms_page": {
+        "column": {
+            "no_index": true,
+            "no_follow": true,
+            "no_archive": true
+        }
+    }
+}
