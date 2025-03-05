@@ -18,6 +18,11 @@
         {
             "name": "Davide Lunardon",
             "email": "dadolun@gmail.com"
+        },
+        {
+            "name": "Tidycode",
+            "email": "info@tidycode.it",
+            "homepage": "https://www.tidycode.it/"
         }
     ],
     "autoload": {
