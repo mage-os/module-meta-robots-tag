@@ -2,43 +2,27 @@
 
 namespace MageOS\MetaRobotsTag\Observer;
 
-use Magento\Framework\Event\Observer;
-use Magento\Framework\Event\ObserverInterface;
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Product;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Page\Config as PageConfig;
 use MageOS\MetaRobotsTag\Api\SetMetaRobotsInterface;
-use Magento\Framework\Exception\LocalizedException;
 
 class SetMetaRobotsCatalog implements ObserverInterface
 {
-    /**
-     * @var Registry
-     */
-    protected $registry;
-    /**
-     * @var PageConfig
-     */
-    protected $pageConfig;
-    /**
-     * @var SetMetaRobotsInterface
-     */
-    protected $setMetaRobots;
-
     /**
      * @param Registry $registry
      * @param PageConfig $pageConfig
      * @param SetMetaRobotsInterface $setMetaRobots
      */
     public function __construct(
-        Registry $registry,
-        PageConfig $pageConfig,
-        SetMetaRobotsInterface $setMetaRobots
+        private readonly Registry $registry,
+        private readonly PageConfig $pageConfig,
+        private readonly SetMetaRobotsInterface $setMetaRobots
     ) {
-        $this->registry = $registry;
-        $this->pageConfig = $pageConfig;
-        $this->setMetaRobots = $setMetaRobots;
     }
 
     /**

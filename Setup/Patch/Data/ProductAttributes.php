@@ -2,49 +2,31 @@
 
 namespace MageOS\MetaRobotsTag\Setup\Patch\Data;
 
-use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
-use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
 use Magento\Catalog\Model\Product as ProductModel;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Exception\LocalizedException;
-use Zend_Validate_Exception;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
 
 class ProductAttributes implements DataPatchInterface
 {
-    /**
-     * @var EavSetupFactory
-     */
-    protected $eavSetup;
-    /**
-     * @var ModuleDataSetupInterface
-     */
-    protected $setup;
-    /**
-     * @var AttributesProviderInterface
-     */
-    protected $attributesProvider;
-
     /**
      * @param EavSetupFactory $eavSetup
      * @param ModuleDataSetupInterface $setup
      * @param AttributesProviderInterface $attributesProvider
      */
     public function __construct(
-        EavSetupFactory $eavSetup,
-        ModuleDataSetupInterface $setup,
-        AttributesProviderInterface $attributesProvider
+        private readonly EavSetupFactory $eavSetup,
+        private readonly ModuleDataSetupInterface $setup,
+        private readonly AttributesProviderInterface $attributesProvider
     ) {
-        $this->eavSetup = $eavSetup;
-        $this->setup = $setup;
-        $this->attributesProvider = $attributesProvider;
     }
 
     /**
      * @return void
      * @throws LocalizedException
-     * @throws Zend_Validate_Exception
      */
     public function apply(): void
     {

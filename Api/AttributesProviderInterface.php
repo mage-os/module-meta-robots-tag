@@ -4,13 +4,13 @@ namespace MageOS\MetaRobotsTag\Api;
 
 interface AttributesProviderInterface
 {
-    const ATTRIBUTES = [
+    public const ATTRIBUTES = [
         'no_index' => 'No index',
         'no_follow' => 'No follow',
         'no_archive' => 'No archive'
     ];
 
-    const ATTRIBUTES_VALUE = [
+    public const ATTRIBUTES_VALUE = [
         'no_index' => [
             true => 'INDEX',
             false => 'NOINDEX'
