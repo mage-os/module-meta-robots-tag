@@ -2,9 +2,9 @@
 
 namespace MageOS\MetaRobotsTag\Model;
 
-use MageOS\MetaRobotsTag\Api\SetMetaRobotsInterface;
-use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
 use Magento\Framework\DataObject;
+use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
+use MageOS\MetaRobotsTag\Api\SetMetaRobotsInterface;
 
 class SetMetaRobots implements SetMetaRobotsInterface
 {
@@ -30,15 +30,26 @@ class SetMetaRobots implements SetMetaRobotsInterface
     public function execute(array $robots, DataObject $entity): array
     {
         foreach ($this->attributesProvider->getAttributes() as $attributeCode => $attributeLabel) {
-            $indexFollowArchive = $this->attributesProvider->getAttributeValue($attributeCode, true);
-
-            if ($this->attributeIsFlaggedInEntity($entity, $attributeCode)) {
-                if ($this->myInArray($indexFollowArchive, $robots) !== false) {
-                    $robots[$this->myInArray($indexFollowArchive, $robots)] = $this->attributesProvider->getAttributeValue($attributeCode);
-                } else {
-                    $robots[] = $this->attributesProvider->getAttributeValue($attributeCode);
-                }
+            if (!$this->attributeIsFlaggedInEntity($entity, $attributeCode)) {
+                continue;
             }
+
+            $robots = $this->updateRobotsValue($robots, $attributeCode);
+        }
+
+        return $robots;
+    }
+
+    protected function updateRobotsValue(array $robots, string $attributeCode): array
+    {
+        $indexFollowArchive = $this->attributesProvider->getAttributeValue($attributeCode, true);
+        $newValue = $this->attributesProvider->getAttributeValue($attributeCode);
+
+        $existingIndex = $this->findCaseInsensitiveMatch($indexFollowArchive, $robots);
+        if ($existingIndex !== false) {
+            $robots[$existingIndex] = $newValue;
+        } else {
+            $robots[] = $newValue;
         }
 
         return $robots;
@@ -49,9 +60,9 @@ class SetMetaRobots implements SetMetaRobotsInterface
      * @param $attributeCode
      * @return bool
      */
-    protected function attributeIsFlaggedInEntity(DataObject $entity, $attributeCode): bool
+    protected function attributeIsFlaggedInEntity(DataObject $entity, string $attributeCode): bool
     {
-        return $entity->getData($attributeCode) ?? false;
+        return (bool)($entity->getData($attributeCode) ?? false);
     }
 
     /**
@@ -59,7 +70,7 @@ class SetMetaRobots implements SetMetaRobotsInterface
      * @param $haystack
      * @return false|int|string
      */
-    protected function myInArray($needle, $haystack)
+    protected function findCaseInsensitiveMatch(string $needle, array $haystack)
     {
         return array_search(strtolower($needle), array_map('strtolower', $haystack));
     }
