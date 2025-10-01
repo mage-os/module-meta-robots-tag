@@ -9,17 +9,11 @@ use MageOS\MetaRobotsTag\Api\SetMetaRobotsInterface;
 class SetMetaRobots implements SetMetaRobotsInterface
 {
     /**
-     * @var AttributesProviderInterface
-     */
-    protected $attributesProvider;
-
-    /**
      * @param AttributesProviderInterface $attributesProvider
      */
     public function __construct(
-        AttributesProviderInterface $attributesProvider
+        private readonly AttributesProviderInterface $attributesProvider
     ) {
-        $this->attributesProvider = $attributesProvider;
     }
 
     /**

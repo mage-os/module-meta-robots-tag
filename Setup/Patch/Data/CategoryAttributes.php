@@ -2,50 +2,32 @@
 
 namespace MageOS\MetaRobotsTag\Setup\Patch\Data;
 
-use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
-use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
 use Magento\Catalog\Model\Category;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Model\Entity\Attribute\Source\Boolean as BooleanSource;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Exception\LocalizedException;
-use Zend_Validate_Exception;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
 
 class CategoryAttributes implements DataPatchInterface
 {
-    /**
-     * @var EavSetupFactory
-     */
-    protected $eavSetup;
-    /**
-     * @var ModuleDataSetupInterface
-     */
-    protected $moduleDataSetup;
-    /**
-     * @var AttributesProviderInterface
-     */
-    protected $attributesProvider;
-
     /**
      * @param EavSetupFactory $eavSetup
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param AttributesProviderInterface $attributesProvider
      */
     public function __construct(
-        EavSetupFactory $eavSetup,
-        ModuleDataSetupInterface $moduleDataSetup,
-        AttributesProviderInterface $attributesProvider
+        private readonly EavSetupFactory $eavSetup,
+        private readonly ModuleDataSetupInterface $moduleDataSetup,
+        private readonly AttributesProviderInterface $attributesProvider
     ) {
-        $this->eavSetup = $eavSetup;
-        $this->moduleDataSetup = $moduleDataSetup;
-        $this->attributesProvider = $attributesProvider;
     }
 
     /**
      * @return void
      * @throws LocalizedException
-     * @throws Zend_Validate_Exception
      */
     public function apply(): void
     {
