@@ -1,5 +1,5 @@
 {
-    "name": "mage-os/meta-robots-tag",
+    "name": "mage-os/module-meta-robots-tag",
     "description": "NoIndex NoFollow NoArchive Tag extension",
     "type": "magento2-module",
     "require": {
