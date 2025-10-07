@@ -4,7 +4,7 @@ NoIndex NoFollow NoArchive Tag extension
 ### Installation
 - Composer:
 ```
-composer require mage-os/meta-robots-tag
+composer require mage-os/module-meta-robots-tag
 ```
 
 After installation, enable the module
