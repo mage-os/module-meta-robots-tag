@@ -12,7 +12,7 @@ class SetMetaRobots implements SetMetaRobotsInterface
      * @param AttributesProviderInterface $attributesProvider
      */
     public function __construct(
-        private readonly AttributesProviderInterface $attributesProvider
+        protected readonly AttributesProviderInterface $attributesProvider
     ) {
     }
 
@@ -34,6 +34,11 @@ class SetMetaRobots implements SetMetaRobotsInterface
         return $robots;
     }
 
+    /**
+     * @param array $robots
+     * @param string $attributeCode
+     * @return array
+     */
     protected function updateRobotsValue(array $robots, string $attributeCode): array
     {
         $indexFollowArchive = $this->attributesProvider->getAttributeValue($attributeCode, true);
@@ -51,7 +56,7 @@ class SetMetaRobots implements SetMetaRobotsInterface
 
     /**
      * @param DataObject $entity
-     * @param $attributeCode
+     * @param string $attributeCode
      * @return bool
      */
     protected function attributeIsFlaggedInEntity(DataObject $entity, string $attributeCode): bool
@@ -60,11 +65,11 @@ class SetMetaRobots implements SetMetaRobotsInterface
     }
 
     /**
-     * @param $needle
-     * @param $haystack
-     * @return false|int|string
+     * @param string $needle
+     * @param array $haystack
+     * @return int|string|false
      */
-    protected function findCaseInsensitiveMatch(string $needle, array $haystack)
+    protected function findCaseInsensitiveMatch(string $needle, array $haystack): int|string|false
     {
         return array_search(strtolower($needle), array_map('strtolower', $haystack));
     }

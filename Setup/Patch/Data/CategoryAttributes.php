@@ -6,10 +6,10 @@ use Magento\Catalog\Model\Category;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Model\Entity\Attribute\Source\Boolean as BooleanSource;
 use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 class CategoryAttributes implements DataPatchInterface
 {
@@ -19,9 +19,9 @@ class CategoryAttributes implements DataPatchInterface
      * @param AttributesProviderInterface $attributesProvider
      */
     public function __construct(
-        private readonly EavSetupFactory $eavSetup,
-        private readonly ModuleDataSetupInterface $moduleDataSetup,
-        private readonly AttributesProviderInterface $attributesProvider
+        protected readonly EavSetupFactory $eavSetup,
+        protected readonly ModuleDataSetupInterface $moduleDataSetup,
+        protected readonly AttributesProviderInterface $attributesProvider
     ) {
     }
 
@@ -51,7 +51,7 @@ class CategoryAttributes implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public static function getDependencies(): array
     {
@@ -59,7 +59,7 @@ class CategoryAttributes implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function getAliases(): array
     {

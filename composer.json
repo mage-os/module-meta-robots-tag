@@ -3,6 +3,7 @@
     "description": "NoIndex NoFollow NoArchive Tag extension",
     "type": "magento2-module",
     "require": {
+        "php": "~8.2.0||~8.3.0||~8.4.0||~8.5.0",
         "magento/framework": "*",
         "magento/module-catalog": ">=103.0.0",
         "magento/module-cms": ">=103.0.0"

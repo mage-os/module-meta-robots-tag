@@ -5,10 +5,10 @@ namespace MageOS\MetaRobotsTag\Setup\Patch\Data;
 use Magento\Catalog\Model\Product as ProductModel;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use MageOS\MetaRobotsTag\Api\AttributesProviderInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 class ProductAttributes implements DataPatchInterface
 {
@@ -18,9 +18,9 @@ class ProductAttributes implements DataPatchInterface
      * @param AttributesProviderInterface $attributesProvider
      */
     public function __construct(
-        private readonly EavSetupFactory $eavSetup,
-        private readonly ModuleDataSetupInterface $setup,
-        private readonly AttributesProviderInterface $attributesProvider
+        protected readonly EavSetupFactory $eavSetup,
+        protected readonly ModuleDataSetupInterface $setup,
+        protected readonly AttributesProviderInterface $attributesProvider
     ) {
     }
 
@@ -53,7 +53,7 @@ class ProductAttributes implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public static function getDependencies(): array
     {
@@ -61,7 +61,7 @@ class ProductAttributes implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function getAliases(): array
     {
